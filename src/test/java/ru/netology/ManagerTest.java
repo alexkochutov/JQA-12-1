@@ -34,24 +34,6 @@ class ManagerTest {
     }
 
     @Test
-    public void shouldReturnFalse() {
-        Repository repo = new Repository();
-        Manager manager = new Manager(repo);
-        boolean expected = false;
-        boolean actual = manager.matches(product2, "Galaxy");
-        assertEquals(expected, actual);
-    }
-
-    @Test
-    public void shouldReturnTrue() {
-        Repository repo = new Repository();
-        Manager manager = new Manager(repo);
-        boolean expected = true;
-        boolean actual = manager.matches(product3, "iPhone");
-        assertEquals(expected, actual);
-    }
-
-    @Test
     public void shouldSearchByInEmptyRepository() {
         Repository repo = new Repository();
         Manager manager = new Manager(repo);
@@ -74,7 +56,33 @@ class ManagerTest {
     }
 
     @Test
-    public void shouldSearchBy() {
+    public void shouldSearchByBookByName() {
+        Repository repo = new Repository();
+        Manager manager = new Manager(repo);
+        manager.add(product1);
+        manager.add(product2);
+        manager.add(product3);
+        manager.add(product4);
+        Product[] expected = {product1};
+        Product[] actual = manager.searchBy("Mr Fox");
+        assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldSearchByBookByAuthor() {
+        Repository repo = new Repository();
+        Manager manager = new Manager(repo);
+        manager.add(product1);
+        manager.add(product2);
+        manager.add(product3);
+        manager.add(product4);
+        Product[] expected = {product2};
+        Product[] actual = manager.searchBy("Ernest Hemingway");
+        assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldSearchBySmartphoneByName() {
         Repository repo = new Repository();
         Manager manager = new Manager(repo);
         manager.add(product1);
@@ -83,6 +91,19 @@ class ManagerTest {
         manager.add(product4);
         Product[] expected = {product3};
         Product[] actual = manager.searchBy("iPhone");
+        assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldSearchBySmartphoneByManufacture() {
+        Repository repo = new Repository();
+        Manager manager = new Manager(repo);
+        manager.add(product1);
+        manager.add(product2);
+        manager.add(product3);
+        manager.add(product4);
+        Product[] expected = {product3};
+        Product[] actual = manager.searchBy("Apple");
         assertArrayEquals(expected, actual);
     }
 
