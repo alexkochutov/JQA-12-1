@@ -21,4 +21,19 @@ class ProductTest {
         assertEquals(expected, actual);
     }
 
+    @Test
+    public void shouldMatchesNothing() {
+        Product product1 = new Product(1, "Product #1", 1000);
+        boolean expected = false;
+        boolean actual = product1.matches("item");
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldMatches() {
+        Product product1 = new Product(1, "Product #1", 1000);
+        boolean expected = true;
+        boolean actual = product1.matches("Product");
+        assertEquals(expected, actual);
+    }
 }
