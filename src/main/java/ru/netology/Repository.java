@@ -8,6 +8,9 @@ public class Repository {
     }
 
     public void save(Product product) {
+        if (findById(product.id) != null) {
+            throw new AlreadyExistsException("Product with id " + product.id + "already exists");
+        }
         Product[] tmp = new Product[products.length + 1];
         for (int i = 0; i < products.length; i++) {
             tmp[i] = products[i];
