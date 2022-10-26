@@ -37,6 +37,16 @@ class RepositoryTest {
     }
 
     @Test
+    public void shouldNotSaveWithException() {
+        Repository repo = new Repository();
+        repo.save(product1);
+        repo.save(product2);
+        assertThrows(AlreadyExistsException.class, () -> {
+            repo.save(product2);
+        });
+    }
+
+    @Test
     public void shouldNotRemoveByIdInEmptyArray() {
         Repository repo = new Repository();
         assertThrows(NotFoundException.class, () -> {
