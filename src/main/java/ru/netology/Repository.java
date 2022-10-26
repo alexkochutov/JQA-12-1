@@ -16,16 +16,18 @@ public class Repository {
         products = tmp;
     }
 
-    public void removeById(int id) {
-        boolean isFounded = false;
+    public Product findById(int id) {
         for (Product product : products) {
             if (product.id == id) {
-                isFounded = true;
-                break;
+                return product;
             }
         }
-        if (!isFounded) {
-            return;
+        return null;
+    }
+
+    public void removeById(int id) {
+        if (findById(id) == null) {
+            throw new NotFoundException("Product with id " + id + "not found");
         }
         Product[] tmp = new Product[products.length - 1];
         int copyToIndex = 0;
