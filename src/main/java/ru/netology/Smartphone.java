@@ -7,4 +7,17 @@ public class Smartphone extends Product {
         super(id, name, cost);
         this.manufacture = manufacture;
     }
+
+    public String getManufacture() {
+        return manufacture;
+    }
+
+    @Override
+    public boolean matches(String search) {
+        if (super.matches(search)) {
+            return true;
+        } else {
+            return getManufacture().contains(search);
+        }
+    }
 }
