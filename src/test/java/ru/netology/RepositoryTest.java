@@ -39,10 +39,9 @@ class RepositoryTest {
     @Test
     public void shouldNotRemoveByIdInEmptyArray() {
         Repository repo = new Repository();
-        repo.removeById(5);
-        Product[] expected = {};
-        Product[] actual = repo.findAll();
-        assertArrayEquals(expected, actual);
+        assertThrows(NotFoundException.class, () -> {
+            repo.removeById(5);
+        });
     }
 
     @Test
@@ -52,10 +51,9 @@ class RepositoryTest {
         repo.save(product2);
         repo.save(product3);
         repo.save(product4);
-        repo.removeById(5);
-        Product[] expected = {product1, product2, product3, product4};
-        Product[] actual = repo.findAll();
-        assertArrayEquals(expected, actual);
+        assertThrows(NotFoundException.class, () -> {
+            repo.removeById(5);
+        });
     }
 
     @Test
